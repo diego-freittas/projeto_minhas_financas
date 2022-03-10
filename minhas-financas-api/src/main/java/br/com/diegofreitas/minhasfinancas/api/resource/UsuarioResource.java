@@ -59,7 +59,7 @@ public class UsuarioResource {
 		}
 	}
 
-	@GetMapping
+	@GetMapping("{id}")
 	public ResponseEntity<?> obterSaldo(@PathVariable("id") Long id) {
 		Optional<Usuario> usuario = usuarioService.obterPorId(id);
 		if (!usuario.isPresent()) {
@@ -68,4 +68,10 @@ public class UsuarioResource {
 		BigDecimal saldo = lancamentoService.obterSaldoPorUsuario(id);
 		return ResponseEntity.ok(saldo);
 	}
+	
+	@GetMapping
+	public String toaqui() {
+		return "to aqui";
+	}
+	
 }

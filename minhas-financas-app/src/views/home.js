@@ -1,5 +1,5 @@
 import React from "react";
-
+import axios from "axios";
 
 class Home extends React.Component {
 
@@ -7,10 +7,21 @@ class Home extends React.Component {
         saldo: 0
     }
 
+    componentDidMount(){
+        const usuarioLogadoString = localStorage.getItem('_usuario_logado')
+        const usuarioLogado = JSON.parse(usuarioLogadoString)
+        axios.get(`http://localhost:8080/api/usuarios/${usuarioLogado.id}/saldo`)
+        .then(response => {
+            this.setState({saldo: response.data})
+        }).catch(error=>{
+            console.error(error.response)
+        });
+        
+    }
+
     render() {
         return (
             <>
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
 
                 <div className="jumbotron">
 
